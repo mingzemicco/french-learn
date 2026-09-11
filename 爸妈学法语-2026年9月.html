@@ -1,0 +1,554 @@
+<title>每日法语一句</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+:root{
+  --ground:#EDF0F2;
+  --surface:#FFFFFF;
+  --surface-2:#F5F7F8;
+  --ink:#16222B;
+  --ink-soft:#516472;
+  --ink-faint:#8093A0;
+  --line:#DDE3E7;
+  --accent:#2B5C86;
+  --accent-soft:#E3EDF5;
+  --gloss:#9A6614;
+  --gloss-soft:#F6EEDD;
+  --ok:#2F6B4F;
+  --shadow:0 1px 2px rgba(22,34,43,.06), 0 8px 24px rgba(22,34,43,.07);
+  --fr:"Fraunces",Georgia,"Times New Roman",serif;
+  --zh:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --ui:"IBM Plex Sans","Noto Sans SC",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0F1720;
+    --surface:#18222D;
+    --surface-2:#1F2B37;
+    --ink:#E9EEF2;
+    --ink-soft:#A8B8C4;
+    --ink-faint:#7D8E9B;
+    --line:#2B3945;
+    --accent:#7FB4DC;
+    --accent-soft:#1F3446;
+    --gloss:#E5B76A;
+    --gloss-soft:#33291A;
+    --ok:#7FC29B;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0F1720;
+  --surface:#18222D;
+  --surface-2:#1F2B37;
+  --ink:#E9EEF2;
+  --ink-soft:#A8B8C4;
+  --ink-faint:#7D8E9B;
+  --line:#2B3945;
+  --accent:#7FB4DC;
+  --accent-soft:#1F3446;
+  --gloss:#E5B76A;
+  --gloss-soft:#33291A;
+  --ok:#7FC29B;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--zh);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{
+  max-width:34rem;
+  margin:0 auto;
+  padding-inline:18px;
+  padding-block:20px 40px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+/* ---------- header ---------- */
+.top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font-family:var(--fr);font-size:1.45rem;font-weight:600;letter-spacing:.01em}
+.brand span{font-family:var(--zh);font-size:1.05rem;font-weight:500;color:var(--ink-soft);margin-left:8px}
+.meta{font-family:var(--ui);font-size:.8rem;color:var(--ink-faint);letter-spacing:.04em}
+
+/* ---------- card ---------- */
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  padding:20px 18px 22px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.scene{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--ui);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);
+}
+.scene b{font-family:var(--zh);font-size:.95rem;letter-spacing:0;text-transform:none;font-weight:500;color:var(--ink-soft)}
+.scene .num{
+  font-variant-numeric:tabular-nums;
+  background:var(--accent-soft);color:var(--accent);
+  border-radius:6px;padding:2px 7px;font-weight:600;letter-spacing:.06em;
+}
+
+/* french sentence: each word tappable */
+.sentence{display:flex;flex-wrap:wrap;gap:2px 4px;align-items:baseline}
+.w{
+  font-family:var(--fr);
+  font-size:2rem;
+  line-height:1.25;
+  font-weight:400;
+  color:var(--ink);
+  background:none;border:0;
+  border-bottom:2px dotted var(--line);
+  padding:2px 3px 3px;
+  margin:0;
+  border-radius:4px;
+  cursor:pointer;
+  transition:background .15s,color .15s;
+}
+.w:hover{background:var(--accent-soft)}
+.w.on{background:var(--accent);color:#fff;border-bottom-color:transparent}
+.punct{font-family:var(--fr);font-size:2rem;color:var(--ink-soft);padding-bottom:3px}
+
+.zh-main{font-size:1.3rem;font-weight:500;line-height:1.5}
+.approx{
+  font-size:.95rem;color:var(--ink-soft);
+  background:var(--gloss-soft);
+  border-radius:8px;padding:8px 11px;
+}
+.approx b{color:var(--gloss);font-weight:500}
+
+/* play row */
+.plays{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{
+  font-family:var(--ui);font-size:1rem;font-weight:500;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 18px;border-radius:10px;border:1px solid var(--accent);
+  background:var(--accent);color:#fff;cursor:pointer;
+}
+:root[data-theme="dark"] .btn, :root:not([data-theme="light"]) .btn{}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0F1720}}
+:root[data-theme="dark"] .btn{color:#0F1720}
+.btn.ghost{background:transparent;color:var(--accent);border-color:var(--line)}
+:root[data-theme="dark"] .btn.ghost{color:var(--accent)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.ghost{color:var(--accent)}}
+.btn.ghost[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.btn:active{transform:translateY(1px)}
+
+/* ---------- breakdown ---------- */
+.section-label{
+  font-family:var(--ui);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-faint);
+  display:flex;align-items:center;gap:10px;
+}
+.section-label::after{content:"";flex:1;height:1px;background:var(--line)}
+.rows{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.row{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;
+  gap:4px 12px;align-items:center;
+  background:var(--surface);
+  padding:12px 14px;
+  border:0;width:100%;text-align:left;cursor:pointer;font:inherit;color:inherit;
+}
+.row:hover{background:var(--surface-2)}
+.row.on{background:var(--accent-soft)}
+.row .fr{font-family:var(--fr);font-size:1.25rem;color:var(--ink)}
+.row .zh{font-size:1.05rem;color:var(--ink);font-weight:500}
+.row .note{grid-column:1/-1;font-size:.88rem;color:var(--ink-soft)}
+.row .spk{font-size:1.1rem;color:var(--accent);justify-self:end}
+
+.tip{
+  font-size:.95rem;color:var(--ink-soft);
+  border-left:3px solid var(--gloss);
+  padding:2px 0 2px 12px;
+}
+.tip b{color:var(--ink);font-weight:500}
+
+/* ---------- nav ---------- */
+.nav{display:flex;gap:10px}
+.nav .btn{flex:1;justify-content:center}
+.learned{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  font-family:var(--ui);font-size:.95rem;color:var(--ink-soft);
+  background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  padding:12px;cursor:pointer;width:100%;
+}
+.learned[aria-pressed="true"]{color:var(--ok);border-color:var(--ok)}
+
+/* ---------- index ---------- */
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+summary{padding:13px 16px;cursor:pointer;font-family:var(--ui);font-size:.95rem;color:var(--ink-soft);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"▾";float:right;color:var(--ink-faint)}
+details[open] summary::after{content:"▴"}
+.list{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.item{
+  display:grid;grid-template-columns:2.2rem minmax(0,1fr) auto;gap:10px;align-items:baseline;
+  padding:11px 16px;border:0;border-top:1px solid var(--line);background:var(--surface);
+  font:inherit;color:inherit;text-align:left;cursor:pointer;
+}
+.item:first-child{border-top:0}
+.item:hover{background:var(--surface-2)}
+.item .n{font-family:var(--ui);font-size:.8rem;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+.item .t{font-family:var(--fr);font-size:1rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .g{font-size:.82rem;color:var(--ink-faint)}
+.item.done .n::before{content:"✓ ";color:var(--ok)}
+.item.today{background:var(--accent-soft)}
+
+.foot{font-family:var(--ui);font-size:.82rem;color:var(--ink-faint);line-height:1.7}
+.warn{color:var(--gloss);font-size:.88rem}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (max-width:380px){ .w,.punct{font-size:1.7rem} .zh-main{font-size:1.2rem} }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">Une phrase par jour<span>每日法语一句</span></div>
+    <div class="meta" id="today-meta"></div>
+  </header>
+
+  <main class="card">
+    <div class="scene">
+      <span class="num" id="lesson-num">01</span>
+      <span id="lesson-scene-fr">SALUER</span>
+      <b id="lesson-scene-zh">打招呼</b>
+    </div>
+
+    <div class="sentence" id="sentence"></div>
+
+    <div class="zh-main" id="translation"></div>
+
+    <div class="approx">近似读音（只是帮忙记，不完全准）：<b id="approx"></b></div>
+
+    <div class="plays">
+      <button class="btn" id="play-all">🔊 读整句</button>
+      <button class="btn ghost" id="slow" aria-pressed="false">🐢 慢速</button>
+    </div>
+
+    <div class="section-label">逐词讲解 · 点一下听发音</div>
+    <div class="rows" id="rows"></div>
+
+    <div class="tip" id="tip"></div>
+  </main>
+
+  <button class="learned" id="learned" aria-pressed="false">☐ 标记为「学会了」</button>
+
+  <nav class="nav">
+    <button class="btn ghost" id="prev">← 上一句</button>
+    <button class="btn ghost" id="today-btn">今天</button>
+    <button class="btn ghost" id="next">下一句 →</button>
+  </nav>
+
+  <details id="index-box">
+    <summary id="index-summary">全部句子</summary>
+    <div class="list" id="list"></div>
+  </details>
+
+  <p class="foot">
+    每天打开一次，只看一句。<span id="voice-note"></span><br>
+    声音用的是手机自带的法语朗读。<br>
+    iPhone：设置 → 辅助功能 → 朗读内容 → 声音 → 法语，下载一个法语声音。<br>
+    安卓：设置 → 语言 → 文字转语音 → 安装法语语音包。
+  </p>
+</div>
+
+<script>
+/* ---------------- 课程内容 ---------------- */
+const LESSONS = [
+ {sceneFr:"SALUER", scene:"打招呼",
+  fr:[["Bonjour","你好 / 早上好","白天见面都用这个词，一天里任何时候都行"],[",",null],["comment","怎么样","疑问词"],["allez","走 / 去（这里是「过得」）","aller 的「您」形式"],["vous","您","礼貌的「你」，对陌生人、长辈都用 vous"],["?",null]],
+  zh:"您好，您好吗？", approx:"蓬如尔，戈蒙 塔累 呜？",
+  tip:"<b>comment allez-vous</b> 是最礼貌的问法。熟人之间说 <b>ça va ?</b>（撒 瓦）就够了。"},
+
+ {sceneFr:"RÉPONDRE", scene:"回答别人",
+  fr:[["Ça","这个 / 它","这里指「我的情况」"],["va","走 / 进行","aller 的第三人称"],["bien","好","副词"],[",",null],["merci","谢谢"],[".",null]],
+  zh:"我很好，谢谢。", approx:"撒 瓦 比昂，梅尔西。",
+  tip:"别人问 <b>ça va ?</b> 时，回一句 <b>ça va bien, merci</b> 最稳妥。反问一句：<b>et vous ?</b>（埃 呜？＝您呢？）"},
+
+ {sceneFr:"AU CAFÉ", scene:"要一杯水",
+  fr:[["J'aimerais","我想要","je（我）＋ aimerais（想要）。元音前 je 缩成 j'"],["boire","喝","动词原形"],["de","一些","表示「一点、一些」"],["l'eau","水","le/la ＋ eau ＝ l'eau"],[".",null]],
+  zh:"我想喝水。", approx:"热梅雷 布瓦尔 德 楼。",
+  tip:"<b>j'aimerais</b> 比 <b>je veux</b>（我要）客气得多，点东西、提要求都用它。"},
+
+ {sceneFr:"AU CAFÉ", scene:"点咖啡",
+  fr:[["Un","一个","阳性「一」"],["café","咖啡"],[",",null],["s'il","如果它","si ＋ il"],["vous","您"],["plaît","让人喜欢","三个词合起来＝「请」"],[".",null]],
+  zh:"请来一杯咖啡。", approx:"昂 咖菲，西勒 呜 普莱。",
+  tip:"<b>s'il vous plaît</b> 就是「请」。在法国，句尾加上它，语气完全不一样。"},
+
+ {sceneFr:"ACHETER", scene:"问价钱",
+  fr:[["Combien","多少","疑问词"],["ça","这个"],["coûte","值 / 花费","coûter 的第三人称"],["?",null]],
+  zh:"这个多少钱？", approx:"贡比昂 撒 库特？",
+  tip:"听不懂数字时，可以说 <b>écrivez, s'il vous plaît</b>（埃克里韦 西勒 呜 普莱 ＝ 请写下来）。"},
+
+ {sceneFr:"BOULANGERIE", scene:"面包店",
+  fr:[["Je","我"],["voudrais","想要","vouloir 的委婉说法，和 j'aimerais 一样客气"],["une","一根","阴性「一」"],["baguette","法棍"],[".",null]],
+  zh:"我想要一根法棍。", approx:"热 呜德雷 玉恩 巴盖特。",
+  tip:"法语名词分阴阳：<b>un</b> 配阳性词，<b>une</b> 配阴性词。baguette 是阴性，所以用 une。"},
+
+ {sceneFr:"DEMANDER", scene:"找洗手间",
+  fr:[["Où","哪里"],["sont","在（复数）","être 的复数形式"],["les","这些","复数冠词"],["toilettes","洗手间","法语里永远是复数"],["?",null]],
+  zh:"洗手间在哪里？", approx:"呜 松 累 图瓦莱特？",
+  tip:"这句在咖啡馆、商场最常用。也可以只说 <b>les toilettes, s'il vous plaît ?</b>"},
+
+ {sceneFr:"SE DÉBROUILLER", scene:"听不懂的时候",
+  fr:[["Je","我"],["ne","不","否定词的前一半"],["comprends","懂 / 明白","comprendre 的「我」形式"],["pas","不","否定词的后一半"],[".",null]],
+  zh:"我听不懂。", approx:"热 呢 贡普朗 巴。",
+  tip:"法语否定是把动词<b>夹在中间</b>：ne ＋ 动词 ＋ pas。口语里常把 ne 省掉，只说 <b>je comprends pas</b>。"},
+
+ {sceneFr:"SE DÉBROUILLER", scene:"请对方说慢点",
+  fr:[["Pouvez","能","pouvoir 的「您」形式"],["-vous","您"],["parler","说话","动词原形"],["plus","更"],["lentement","慢地"],["?",null]],
+  zh:"您能说慢一点吗？", approx:"普韦 呜 巴尔累 普吕 朗特芒？",
+  tip:"<b>Pouvez-vous… ?</b> ＝「您能…吗？」，后面换个动词就能用一辈子。"},
+
+ {sceneFr:"SE DÉBROUILLER", scene:"说明自己不会法语",
+  fr:[["Je","我"],["ne","不"],["parle","说","parler 的「我」形式"],["pas","不"],["français","法语","小写，指语言"],[".",null]],
+  zh:"我不会说法语。", approx:"热 呢 巴尔勒 巴 弗朗塞。",
+  tip:"再加一句 <b>je parle chinois</b>（热 巴尔勒 希努瓦 ＝ 我说中文），对方就知道该怎么帮您了。"},
+
+ {sceneFr:"SE DÉBROUILLER", scene:"问对方会不会中文",
+  fr:[["Parlez","说","parler 的「您」形式"],["-vous","您"],["chinois","中文"],["?",null]],
+  zh:"您会说中文吗？", approx:"巴尔累 呜 希努瓦？",
+  tip:"同样的句型：<b>parlez-vous anglais ?</b>（…昂格莱？）＝ 您会说英语吗？"},
+
+ {sceneFr:"POLITESSE", scene:"道谢",
+  fr:[["Merci","谢谢"],["beaucoup","很多 / 非常"],[".",null]],
+  zh:"非常感谢。", approx:"梅尔西 博库。",
+  tip:"法国人道谢很频繁。进店、出店、找完零钱，都可以说一声 merci。"},
+
+ {sceneFr:"POLITESSE", scene:"回应谢谢",
+  fr:[["De","从 / 由"],["rien","没什么"],[".",null]],
+  zh:"不用谢。", approx:"德 里昂。",
+  tip:"字面是「没什么」。更客气的说法是 <b>je vous en prie</b>（热 呜 藏 普里）。"},
+
+ {sceneFr:"POLITESSE", scene:"打扰一下",
+  fr:[["Excusez","原谅","excuser 的「您」形式"],["-moi","我"],[",",null],["monsieur","先生","对女士说 madame"],[".",null]],
+  zh:"打扰一下，先生。", approx:"埃克斯居泽 穆瓦，麦西约。",
+  tip:"想问路、想叫服务员，先说这句再开口。撞到人时说 <b>pardon</b>（巴尔东）。"},
+
+ {sceneFr:"SE PRÉSENTER", scene:"自我介绍",
+  fr:[["Je","我"],["m'appelle","叫作","字面是「我把自己叫作」"],["Wei","伟","换成自己的名字"],[".",null]],
+  zh:"我叫伟。", approx:"热 马佩勒 伟。",
+  tip:"对方回问 <b>et vous ?</b> 或 <b>comment vous appelez-vous ?</b> 就是在问您叫什么。"},
+
+ {sceneFr:"SE PRÉSENTER", scene:"说自己从哪来",
+  fr:[["Je","我"],["viens","来","venir 的「我」形式"],["de","从"],["Chine","中国","国家名大写"],[".",null]],
+  zh:"我来自中国。", approx:"热 维昂 德 欣呢。",
+  tip:"住在哪里：<b>j'habite à Paris</b>（热阿比特 阿 巴黎）＝ 我住在巴黎。"},
+
+ {sceneFr:"AU RESTAURANT", scene:"说自己饿了",
+  fr:[["J'ai","我有","je ＋ ai"],["faim","饿","法语说「我有饿」"],[".",null]],
+  zh:"我饿了。", approx:"热 房。",
+  tip:"同一个结构：<b>j'ai soif</b>（热 苏瓦夫）＝ 我渴了；<b>j'ai froid</b>（热 弗瓦）＝ 我冷。"},
+
+ {sceneFr:"AU RESTAURANT", scene:"结账",
+  fr:[["L'addition","账单","la ＋ addition"],[",",null],["s'il","如果它"],["vous","您"],["plaît","请"],[".",null]],
+  zh:"请结账。", approx:"拉迪西翁，西勒 呜 普莱。",
+  tip:"在法国要主动叫账单，服务员一般不会自己送过来。"},
+
+ {sceneFr:"TRANSPORTS", scene:"找地铁站",
+  fr:[["Où","哪里"],["est","是 / 在","être 的第三人称"],["la","这个","阴性冠词"],["station","站"],["de","的"],["métro","地铁"],["?",null]],
+  zh:"地铁站在哪里？", approx:"呜 埃 拉 斯塔西翁 德 梅特罗？",
+  tip:"记住万能句型 <b>Où est… ?</b>＝「…在哪里？」，后面换词就行。"},
+
+ {sceneFr:"TRANSPORTS", scene:"买车票",
+  fr:[["Deux","两张"],["tickets","票","复数"],[",",null],["s'il","如果它"],["vous","您"],["plaît","请"],[".",null]],
+  zh:"请给两张票。", approx:"德 蒂凯，西勒 呜 普莱。",
+  tip:"数字：un 昂 1、deux 德 2、trois 特瓦 3、quatre 卡特尔 4、cinq 桑克 5。"},
+
+ {sceneFr:"SANTÉ", scene:"身体不舒服",
+  fr:[["Je","我"],["ne","不"],["me","自己"],["sens","感觉","sentir 的「我」形式"],["pas","不"],["bien","好"],[".",null]],
+  zh:"我不舒服。", approx:"热 呢 么 桑 巴 比昂。",
+  tip:"要看医生：<b>j'ai besoin d'un médecin</b>（热 伯祖昂 但 梅德桑）＝ 我需要医生。"},
+
+ {sceneFr:"SANTÉ", scene:"在药店",
+  fr:[["J'ai","我有"],["mal","疼"],["à","在"],["la","这个"],["tête","头"],[".",null]],
+  zh:"我头疼。", approx:"热 马勒 阿 拉 泰特。",
+  tip:"换个部位：<b>au ventre</b>（奥 旺特尔）肚子、<b>à la gorge</b>（阿 拉 戈尔日）嗓子、<b>au dos</b>（奥 多）背。"},
+
+ {sceneFr:"MÉTÉO", scene:"说天气",
+  fr:[["Il","它","这里不指人，只是固定说法"],["fait","做 / 是","faire 的第三人称"],["beau","晴朗 / 好看"],["aujourd'hui","今天"],[".",null]],
+  zh:"今天天气很好。", approx:"伊尔 费 博 奥如尔迪。",
+  tip:"天气都用 <b>il fait…</b>：<b>il fait froid</b> 冷、<b>il fait chaud</b> 热、<b>il pleut</b>（伊尔 普勒）下雨。"},
+
+ {sceneFr:"LE TEMPS", scene:"问时间",
+  fr:[["Quelle","什么","阴性疑问词"],["heure","小时 / 点钟"],["est","是"],["-il","它"],["?",null]],
+  zh:"现在几点了？", approx:"凯勒 厄尔 埃 提尔？",
+  tip:"回答：<b>il est trois heures</b>（伊莱 特瓦 泽尔）＝ 三点了。"},
+
+ {sceneFr:"AU SUPERMARCHÉ", scene:"在超市找东西",
+  fr:[["Je","我"],["cherche","找","chercher 的「我」形式"],["le","这个","阳性冠词"],["lait","牛奶"],[".",null]],
+  zh:"我在找牛奶。", approx:"热 谢尔什 勒 莱。",
+  tip:"换词就能用：<b>le riz</b> 米、<b>les œufs</b>（累 泽）鸡蛋、<b>le pain</b>（勒 班）面包。"},
+
+ {sceneFr:"POLITESSE", scene:"请对方等一下",
+  fr:[["Un","一个"],["instant","瞬间 / 一会儿"],[",",null],["s'il","如果它"],["vous","您"],["plaît","请"],[".",null]],
+  zh:"请稍等。", approx:"昂 南斯当，西勒 呜 普莱。",
+  tip:"接电话、找零钱、翻包找东西的时候都能用。"},
+
+ {sceneFr:"DEMANDER", scene:"请人帮忙",
+  fr:[["Pouvez","能"],["-vous","您"],["m'aider","帮我","me ＋ aider"],["?",null]],
+  zh:"您能帮我一下吗？", approx:"普韦 呜 梅代？",
+  tip:"这是出门在外最有用的一句。先说 <b>excusez-moi</b>，再说这句。"},
+
+ {sceneFr:"À TABLE", scene:"夸菜好吃",
+  fr:[["C'est","这是","ce ＋ est"],["très","很"],["bon","好吃 / 好"],["!",null]],
+  zh:"非常好吃！", approx:"塞 特雷 蓬！",
+  tip:"<b>C'est très…</b> 是万能夸奖句：<b>c'est très beau</b> 很漂亮、<b>c'est très gentil</b> 您真好。"},
+
+ {sceneFr:"SALUER", scene:"晚上打招呼",
+  fr:[["Bonsoir","晚上好","大约傍晚六点以后用"],[",",null],["madame","女士"],[".",null]],
+  zh:"晚上好，女士。", approx:"蓬苏瓦尔，玛达姆。",
+  tip:"睡前道别说 <b>bonne nuit</b>（蓬 妞 ＝ 晚安），这句只在真正要去睡的时候用。"},
+
+ {sceneFr:"SALUER", scene:"道别",
+  fr:[["Au revoir","再见","字面是「到再见面时」"],[",",null],["bonne","好的","阴性"],["journée","一天"],[".",null]],
+  zh:"再见，祝您今天愉快。", approx:"奥 何瓦尔，蓬呢 如尔内。",
+  tip:"离开店铺时说这句，非常地道。晚上改说 <b>bonne soirée</b>（蓬呢 苏瓦雷）。"}
+];
+
+/* ---------------- 状态 ---------------- */
+const SLOW_KEY="fl-slow", DONE_KEY="fl-done", IDX_KEY="fl-idx";
+const store={
+  get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+let done = store.get(DONE_KEY,[]) || [];
+let slow = store.get(SLOW_KEY,false);
+const todayIndex = (()=>{
+  const days = Math.floor(Date.now()/86400000);
+  return ((days % LESSONS.length) + LESSONS.length) % LESSONS.length;
+})();
+let current = todayIndex;
+
+/* ---------------- 发音 ---------------- */
+let frVoice=null;
+function pickVoice(){
+  const vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+  const fr = vs.filter(v=>/^fr(-|_|$)/i.test(v.lang||""));
+  if(!fr.length){ frVoice=null; return; }
+  frVoice = fr.find(v=>/fr-FR/i.test(v.lang) && /Thomas|Amélie|Amelie|Audrey|Marie|Google/i.test(v.name))
+         || fr.find(v=>/fr-FR/i.test(v.lang))
+         || fr[0];
+}
+function voiceNote(){
+  const el=document.getElementById("voice-note");
+  if(!window.speechSynthesis){ el.innerHTML=' <span class="warn">这个浏览器不支持朗读，请换用 Safari 或 Chrome。</span>'; return; }
+  el.innerHTML = frVoice ? "" : ' <span class="warn">还没找到法语语音，按下面的步骤装一个就能听了。</span>';
+}
+if(window.speechSynthesis){
+  pickVoice();
+  speechSynthesis.onvoiceschanged = ()=>{ pickVoice(); voiceNote(); };
+}
+function speak(text){
+  if(!window.speechSynthesis || !text) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = frVoice ? frVoice.lang : "fr-FR";
+  if(frVoice) u.voice = frVoice;
+  u.rate = slow ? 0.6 : 0.88;
+  u.pitch = 1;
+  speechSynthesis.speak(u);
+}
+function flash(el){
+  if(!el) return;
+  el.classList.add("on");
+  setTimeout(()=>el.classList.remove("on"), slow?1400:850);
+}
+
+/* ---------------- 渲染 ---------------- */
+const $ = id=>document.getElementById(id);
+function sentenceText(l){
+  return l.fr.reduce((s,[w])=>{
+    const isPunct = /^[,.!?;:]$/.test(w);
+    return s + (s && !isPunct ? " " : "") + w;
+  },"");
+}
+function render(){
+  const l = LESSONS[current];
+  $("lesson-num").textContent = String(current+1).padStart(2,"0");
+  $("lesson-scene-fr").textContent = l.sceneFr;
+  $("lesson-scene-zh").textContent = l.scene;
+
+  const s = $("sentence"); s.textContent = "";
+  l.fr.forEach(([w,zh])=>{
+    if(!zh){ const p=document.createElement("span"); p.className="punct"; p.textContent=w; s.appendChild(p); return; }
+    const b=document.createElement("button");
+    b.className="w"; b.type="button"; b.textContent=w;
+    b.setAttribute("aria-label", w+"，"+zh+"，点击发音");
+    b.addEventListener("click",()=>{ speak(w); flash(b); });
+    s.appendChild(b);
+  });
+
+  $("translation").textContent = l.zh;
+  $("approx").textContent = l.approx;
+  $("tip").innerHTML = l.tip;
+
+  const rows = $("rows"); rows.textContent="";
+  l.fr.filter(([,zh])=>zh).forEach(([w,zh,note])=>{
+    const r=document.createElement("button");
+    r.className="row"; r.type="button";
+    const f=document.createElement("span"); f.className="fr"; f.textContent=w;
+    const z=document.createElement("span"); z.className="zh"; z.textContent=zh;
+    r.appendChild(f); r.appendChild(z);
+    if(note){ const n=document.createElement("span"); n.className="note"; n.textContent=note; r.appendChild(n); }
+    r.addEventListener("click",()=>{ speak(w); flash(r); });
+    rows.appendChild(r);
+  });
+
+  const isDone = done.includes(current);
+  const lb = $("learned");
+  lb.setAttribute("aria-pressed", isDone?"true":"false");
+  lb.textContent = isDone ? "✓ 已经学会了" : "☐ 标记为「学会了」";
+
+  renderList();
+  store.set(IDX_KEY, current);
+}
+function renderList(){
+  const list=$("list"); list.textContent="";
+  LESSONS.forEach((l,i)=>{
+    const b=document.createElement("button");
+    b.className="item"+(done.includes(i)?" done":"")+(i===current?" today":"");
+    b.type="button";
+    const n=document.createElement("span"); n.className="n"; n.textContent=String(i+1).padStart(2,"0");
+    const t=document.createElement("span"); t.className="t"; t.textContent=sentenceText(l);
+    const g=document.createElement("span"); g.className="g"; g.textContent=l.scene;
+    b.append(n,t,g);
+    b.addEventListener("click",()=>{ current=i; render(); $("index-box").open=false; window.scrollTo({top:0,behavior:"smooth"}); });
+    list.appendChild(b);
+  });
+  $("index-summary").textContent = "全部 "+LESSONS.length+" 句 · 已学会 "+done.length+" 句";
+}
+
+/* ---------------- 交互 ---------------- */
+$("play-all").addEventListener("click",()=>speak(sentenceText(LESSONS[current])));
+const slowBtn=$("slow");
+function paintSlow(){ slowBtn.setAttribute("aria-pressed", slow?"true":"false"); slowBtn.textContent = slow ? "🐢 慢速（开）" : "🐢 慢速"; }
+slowBtn.addEventListener("click",()=>{ slow=!slow; store.set(SLOW_KEY,slow); paintSlow(); speak(sentenceText(LESSONS[current])); });
+paintSlow();
+
+$("prev").addEventListener("click",()=>{ current=(current-1+LESSONS.length)%LESSONS.length; render(); });
+$("next").addEventListener("click",()=>{ current=(current+1)%LESSONS.length; render(); });
+$("today-btn").addEventListener("click",()=>{ current=todayIndex; render(); });
+$("learned").addEventListener("click",()=>{
+  const i=done.indexOf(current);
+  if(i>=0) done.splice(i,1); else done.push(current);
+  store.set(DONE_KEY,done); render();
+});
+
+$("today-meta").textContent = new Date().toLocaleDateString("zh-CN",{month:"long",day:"numeric",weekday:"long"});
+voiceNote();
+render();
+</script>
