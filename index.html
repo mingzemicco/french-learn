@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#EDF0F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1720" media="(prefers-color-scheme: dark)">
+<meta name="description" content="每天一句日常法语，中文逐词讲解，整句和单词都能点击发音。">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="每日法语">
+<meta name="mobile-web-app-capable" content="yes">
 <title>每日法语一句</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,18 +66,21 @@
 }
 
 *{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:var(--ground)}
 body{
+  margin:0;
+  min-height:100%;
   background:var(--ground);
   color:var(--ink);
   font-family:var(--zh);
   font-size:17px;
   line-height:1.6;
-  -webkit-text-size-adjust:100%;
 }
+img{max-width:100%}
 .wrap{
   max-width:34rem;
   margin:0 auto;
-  padding-inline:18px;
+  padding-inline:calc(18px + env(safe-area-inset-left)) calc(18px + env(safe-area-inset-right));
   padding-block:20px 40px;
   display:flex;
   flex-direction:column;
@@ -213,7 +227,8 @@ details[open] summary::after{content:"▴"}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 @media (max-width:380px){ .w,.punct{font-size:1.7rem} .zh-main{font-size:1.2rem} }
 </style>
-
+</head>
+<body>
 <div class="wrap">
   <header class="top">
     <div class="brand">Une phrase par jour<span>每日法语一句</span></div>
@@ -552,3 +567,5 @@ $("today-meta").textContent = new Date().toLocaleDateString("zh-CN",{month:"long
 voiceNote();
 render();
 </script>
+</body>
+</html>
